@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>静态博客2</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+  </head>
+  <body>
+    <nav>
+    
+      <a href="/" >Home</a>
+    
+      <a href="/about.html" >About</a>
+    
+      <a href="/blog.html" >Blog</a>
+    
+  </nav>
+    <h1>静态博客2</h1>
+<p>03 Jul 2023 - jill</p>
+
+<p>Jekyll需要前端web开发经验。
+Jekyll具有丰富的主题，而不是只使用gem默认主题。
+Jekyll是ruby的一个gem。</p>
+
+<p>说明：基本就是官网的翻译。可以直接看官网。</p>
+<h1 id="步骤如下">步骤如下：</h1>
+<h2 id="1-建项目">1. 建项目</h2>
+<p>根据gitpages官网指示创建仓库和index.html，并clone拉到本地，假设在myblog文件夹下。以下命令，没有特殊说明的话，都是在myblog文件夹下执行。</p>
+<h2 id="2-安装前置条件ruby">2. 安装前置条件ruby,</h2>
+<h2 id="3-安装jekyll">3. 安装jekyll</h2>
+<p>在myblog文件夹下，为你的项目，安装jekyll。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装jekyll</span>
+gem <span class="nb">install </span>jekyll bundler
+<span class="c"># cd myblog下后。初始化文件夹，生成Gemfile。</span>
+bundle init
+<span class="c"># 打开Gemfile, 在末尾添加如下内容，增加Jekyll依赖。</span>
+gem <span class="s1">'jekyll'</span>
+<span class="c"># 为你的项目安装jekyll。生成Gemfile.lock。</span>
+bundle
+</code></pre></div></div>
+<h2 id="4-构建">4. 构建</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 构建网络，生成_site文件夹，可以在htpp://localhost:4000看到网页，并且可以实时更新。在界面上看到helloworld，你就成功了。</span>
+jekyll serve
+</code></pre></div></div>
+<h2 id="5-编辑你的文章indexhtml---增加liquid">5. 编辑你的文章index.html - 增加<a href="#liquidId">liquid</a></h2>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- # 文章头部加两行---，代表Front Matter区域，代表这个文章需要被jekyll解析, 计算liquid等。 --&gt;</span>
+---
+---
+<span class="c">&lt;!-- # 文章内容可以使用Liquid模板语言。 --&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Home<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+  <span class="c">&lt;!-- 这个模板语言，表示将字母小写，最终会在网页上看到hello world! --&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>hello world!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2 id="6-编辑你的文章indexhtml---增加front-matter例如设置变量title及其调用">6. 编辑你的文章index.html - 增加Front Matter，例如设置变量title及其调用</h2>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: Home
+---
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>静态博客2<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>hello world!<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2 id="7-使用markdown而不是html编辑你的文章-layouts">7. 使用markdown，而不是html编辑你的文章。-layouts</h2>
+<ul>
+  <li>设置layout: 在根目录下创建_layouts文件夹，进入_layouts文件夹，创建default.html，内容如下。
+```html
+&lt;!doctype html&gt;</li>
+</ul>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>静态博客2</title>
+    <style>
+        body {
+            background-color: aqua;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Hello World Article</h1>
+<p>02 Jul 2023 - jill</p>
+
+<p>A banana is an edible fruit – botanically a berry – produced by several
+kinds of large herbaceous flowering plants in the genus Musa.</p>
+
+<p>In some countries, bananas used for cooking may be called “plantains”,
+distinguishing them from dessert bananas. The fruit is variable in size,
+color, and firmness, but is usually elongated and curved, with soft
+flesh rich in starch covered with a rind, which may be green, yellow,
+red, purple, or brown when ripe.</p>
+
+  </body>
+</html>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 在项目根目录创建markdown文件,about.md，输入：
+</code></pre></div></div>
+<hr />
+<p>title: about
+—
+hello world.Markdown for Jekyll.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 使用layout：在index.html和about.md文件的在Front Matter区域，增加layout: deafult，即：
+</code></pre></div></div>
+<hr />
+<p>layout: default
+—</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>然后访问localhots:4000和localhost:4000/about就会发现背景色不再是白色的，而是layout default.html中设置的颜色。
+## 8. 导航。-学习includes
+_includes
+
+# &lt;span id='liquidId'&gt;Liquid：模板语言&lt;/span&gt;
+包含三个主要组件：
+- Objects对象。objects对象告诉liquid要输出**预定义变量**。
+用4个大括号表示，比如静态博客2表示要输出page.title变量。
+# Front Matter 前置事件
+</code></pre></div></div>
+<hr />
+<hr />
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Front Matter就是其中间的YAML片段。
+
+
+```bash
+---
+# 设置变量。可以使用liquid调用。调用时使用：
+my_number: 5
+---
+</code></pre></div></div>
+<h2 id="变量">变量</h2>
+<ul>
+  <li>page.url: 当前文章的url路径，是以_site为根目录的相对路径。比如/about.html，/2023/07/01/article.html</li>
+  <li>site.data.navigation： data目录下navigation.yml里的内容，返回array</li>
+  <li>site.posts： _post目录下的文件
+  post.excerpt： 默认情况下是文章的第一段</li>
+</ul>
+
+<h1 id="jekyll目录结构">jekyll目录结构：</h1>
+<p>_site: 存储Jekyll生成的文件，最终会呈现在网页上，不需要改动。
+Gemfile
+Gemfile.lock
+_layouts: 样式模板。
+    default.html,调用导航模板html，调用css文件。在文章内容中的Front Matter区域中使用: layout:default。
+    layout可以继承
+_includes: 导航模板。navigation.html。 对标签样式特殊标记。
+_data:
+    - navigation.yml 存储所有的导航链接，每一组由name、link组成。在_includes.navifation.html中调用site.data.navigation，返回链接的迭代器。
+asset:
+    css
+        styles.scss
+    images
+    js
+_sass:
+    main.scss
+_posts:放置你的文章。必须按照特殊的格式：发表时间（不能是未来时间，否则显示不出来）、标题 <br />
+      title、后缀。2023-07-02-hello-world-article.md
+      变量site.posts是所有文章对象，可以用迭代器循环。
+      最终文章会被Jekyll构建到_site目录下。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    &lt;li&gt;
+      &lt;h2&gt;&lt;a href="/2023/07/03/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A22.html"&gt;静态博客2&lt;/a&gt;&lt;/h2&gt;
+      &lt;p&gt;Jekyll需要前端web开发经验。
+Jekyll具有丰富的主题，而不是只使用gem默认主题。
+Jekyll是ruby的一个gem。&lt;/p&gt;
+
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;h2&gt;&lt;a href="/2023/07/03/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F.html"&gt;商业模式&lt;/a&gt;&lt;/h2&gt;
+      &lt;p&gt;&lt;a href="https://meta.stackexchange.com/questions/79435/what-is-stack-overflows-business-model"&gt;stackOverFlow&lt;/a&gt;&lt;/p&gt;
+
+
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;h2&gt;&lt;a href="/2023/07/02/hello-world-article.html"&gt;Hello World Article&lt;/a&gt;&lt;/h2&gt;
+      &lt;p&gt;A banana is an edible fruit – botanically a berry – produced by several
+kinds of large herbaceous flowering plants in the genus Musa.&lt;/p&gt;
+
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;h2&gt;&lt;a href="/2023/07/01/apple.html"&gt;Apple&lt;/a&gt;&lt;/h2&gt;
+      &lt;p&gt;Apple&lt;/p&gt;
+
+    &lt;/li&gt;
+  
+    &lt;li&gt;
+      &lt;h2&gt;&lt;a href="/2023/06/30/kiwifruit.html"&gt;Kiwifruit&lt;/a&gt;&lt;/h2&gt;
+      &lt;p&gt;Kiwifruit&lt;/p&gt;
+
+    &lt;/li&gt;
+  
+</code></pre></div></div>
+
+<p>Bundler是Ruby依赖管理工具。
+<code class="language-plaintext highlighter-rouge">bundle init</code>用来初始化文件夹。将会在文件夹下新建Gemfile，这个自动生成的Gemfile默认会包含rubygem的源。
+Gemfiles最少需要一个gem源。
+Gemfileges文件结构:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># frozen_string_literal: true
+# A sample Gemfile
+# 源
+# 需要下载的依赖
+source "https://rubygems.org"
+gem "rails"
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bundle</code>生成Gemfile.lock文件</p>
+
+<p>更多请查看Jekyll官网。
+[按步骤学习]:https://jekyllrb.com/docs/step-by-step/01-setup/</p>
+
+  </body>
+</html>
