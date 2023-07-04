@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Githubpage +jekyll生成个人静态博客</title><meta name="application-name" content="Githubpage +jekyll生成个人静态博客"><meta name="description" content="Jekyll需要前端web开发经验。Jekyll具有丰富的主题，而不是只使用gem默认主题。"><meta name="theme-color" content="#007b8b"><meta name="mobile-web-app-capable" content=yes><meta name="msapplication-starturl" content="https://blog.guyskk.com"><meta name="msapplication-navbutton-color" content="#007b8b"><meta name="apple-mobile-web-app-capable" content=yes><meta name="apple-mobile-web-app-title" content="Githubpage +jekyll生成个人静态博客"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="twitter:card" content="summary" /><meta name="twitter:site" content="@" /><meta name="twitter:title" content="Githubpage +jekyll生成个人静态博客" /><meta name="twitter:description" content="Jekyll需要前端web开发经验。Jekyll具有丰富的主题，而不是只使用gem默认主题。"><link rel="icon" href="/assets/favicon.png"><link rel="apple-touch-icon" href="/assets/touch-icon.png"><link rel="stylesheet" href="/assets/core.css"><link rel="canonical" href="/2023/07/04/githubPage-+Jekyll%E7%94%9F%E6%88%90%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html"><link rel="alternate" type="application/atom+xml" title="HackerXinAi的博客" href="/feed.xml" /></head><body><aside class="logo"> <a href="/"> </a> <span class="logo-prompt">返回主页</span></aside><main> <noscript><style> article .footnotes { display: block; }</style></noscript><article><div class="center"><h1>Githubpage +jekyll生成个人静态博客</h1><time>2023年, 7月4日</time></div><div class="divider"></div><p>Jekyll需要前端web开发经验。 Jekyll具有丰富的主题，而不是只使用gem默认主题。</p><p>说明：基本就是官网的翻译。可以直接看官网。</p><h1 id="步骤如下">步骤如下：</h1><h2 id="1-建项目">1. 建项目</h2><p>根据gitpages官网指示创建仓库和index.html，并clone拉到本地，假设在myblog文件夹下。以下命令，没有特殊说明的话，都是在myblog文件夹下执行。</p><h2 id="2-安装前置条件ruby">2. 安装前置条件ruby,</h2><h2 id="3-安装jekyll">3. 安装jekyll</h2><p>在myblog文件夹下，为你的项目，安装jekyll。</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装jekyll和bundler。</span>
+gem <span class="nb">install </span>jekyll bundler
+<span class="c"># cd myblog下后。初始化文件夹，生成Gemfile。</span>
+bundle init
+<span class="c"># 打开Gemfile, 在末尾添加如下内容，增加Jekyll依赖。</span>
+gem <span class="s1">'jekyll'</span>
+<span class="c"># 为你的项目初始化jekyll。生成Gemfile.lock。</span>
+bundle
+</code></pre></div></div><h2 id="4-构建">4. 构建</h2><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 构建网络，生成_site文件夹，可以在htpp://localhost:4000看到网页，并且可以实时更新。在界面上看到helloworld，你就成功了。</span>
+bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div></div><h2 id="5-编辑你的文章indexhtml---增加liquid">5. 编辑你的文章index.html - 增加<a href="#liquidId">liquid</a></h2><p>在你的根目录下创建index.html，填入如下内容：</p><div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+---
+---
+<span class="c">&lt;!-- # 文章内容可以使用Liquid模板语言。 --&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Home<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+  <span class="c">&lt;!-- 这个模板语言，表示将字母小写，最终会在网页上看到hello world! --&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>{{ "Hello World!" | downcase }}<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre></div></div><h2 id="6-编辑你的文章indexhtml---增加front-matter例如设置变量title及其调用">6. 编辑你的文章index.html - 增加Front Matter，例如设置变量title及其调用</h2><p>注：文章头部加两行—，代表Front Matter区域，代表这个文章需要被jekyll解析, 计算liquid等。</p><div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+---
+title: Home
+---
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>{{ page.title }}<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>{{ "Hello World!" | downcase }}<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre></div></div><h2 id="7-使用markdown而不是html编辑你的文章-layouts">7. 使用markdown，而不是html编辑你的文章。-layouts</h2><ul><li>设置layout: 在根目录下创建_layouts文件夹，进入_layouts文件夹，创建default.html，内容如下。</li></ul><div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Githubpage +jekyll生成个人静态博客<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nt">body</span> <span class="p">{</span> <span class="nl">background-color</span><span class="p">:</span> <span class="no">aqua</span><span class="p">;</span>  <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    {{ content }} 
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div><ul><li>在项目根目录创建markdown文件,about.md，输入：</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: about
+---
+hello world.Markdown for Jekyll.
+</code></pre></div></div><ul><li>使用layout：在index.html和about.md文件的在Front Matter区域，增加layout: deafult，即：</li></ul><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: default
+---
+</code></pre></div></div><p>然后访问localhots:4000和localhost:4000/about就会发现背景色不再是白色的，而是layout default.html中设置的颜色。</p><h2 id="8-导航-学习includes">8. 导航。-学习includes</h2><p>_includes</p><h1 id="liquid模板语言"><span id="liquidId">Liquid：模板语言</span></h1><p>包含三个主要组件：</p><ul><li>Objects对象。objects对象告诉liquid要输出<strong>预定义变量</strong>。 用4个大括号表示，比如Githubpage +jekyll生成个人静态博客表示要输出page.title变量。</li><li>tags标签。tags标签定义了<strong>模板的逻辑和控制流</strong>。 用 {% %} 表示。 例如，用变量控制html页面下列元素是否展示。</li></ul><div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {% if page.show_sidebar %}
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"sidebar"</span><span class="nt">&gt;</span>
+        sidebar content
+    <span class="nt">&lt;/div&gt;</span>
+{% endif %} 
+</code></pre></div></div><ul><li>filters过滤器。过滤器能够改变liquid的输出。示例:04 Jul 2023</li></ul><h1 id="front-matter-前置事件">Front Matter 前置事件</h1><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+---
+</code></pre></div></div><p>Front Matter就是其中间的YAML片段。</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span>
+<span class="c"># 设置变量。可以使用liquid调用。调用时使用：</span>
+my_number: 5
+<span class="nt">---</span>
+</code></pre></div></div><h2 id="变量">变量</h2><ul><li>page.url: 当前文章的url路径，是以_site为根目录的相对路径。比如/about.html，/2023/07/01/article.html</li><li>site.data.navigation： data目录下navigation.yml里的内容，返回array</li><li>site.posts： _post目录下的文件 post.excerpt： 默认情况下是文章的第一段</li></ul><div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% for post in site.posts %}
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;h2&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/h2&gt;</span>
+      {{ post.excerpt }}
+    <span class="nt">&lt;/li&gt;</span>
+{% endfor %}
+</code></pre></div></div><h1 id="jekyll目录结构">jekyll目录结构：</h1><p>_site: 存储Jekyll生成的文件，最终会呈现在网页上，不需要改动。 Gemfile: 使用<code class="language-plaintext highlighter-rouge">bundle init</code>命令能够生成Gemfile。如果存在Gemfile的话，执行的命令前会自动加上bundle exec，比如你执行<code class="language-plaintext highlighter-rouge">jekyll server</code>,实际上执行的是<code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code> Gemfile.lock _layouts: 样式模板。 default.html,调用导航模板html，调用css文件。在文章内容中的Front Matter区域中使用: layout:default。 layout可以继承 _includes: 导航模板。navigation.html。 对标签样式特殊标记。 _data: - navigation.yml 存储所有的导航链接，每一组由name、link组成。调用变量site.data.navigation，返回链接的迭代器。 asset: css styles.scss：指向_sass路径下的scss文件。jekyll调用，会将其转换为style.css. images js _sass: main.scss：包含样式的scss文件。 _posts:放置你的文章。必须按照特殊的格式：发表时间（不能是未来时间，否则显示不出来）、标题 <br /> title、后缀。2023-07-02-hello-world-article.md 变量site.posts是所有文章对象，可以用迭代器循环。 最终文章会被Jekyll构建到_site目录下。 _config.yml: 配置文件，构建网站时的设置。没有配置时，会自动使用默认配置，比如网站名、markdown转html默认使用Kramdown Markdown filter。</p><div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozen_string_literal: true</span>
+<span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="n">gem</span> <span class="s2">"jekyll"</span>
+</code></pre></div></div><div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># _config.yml</span>
+<span class="na">collections</span><span class="pi">:</span>
+  <span class="na">authors</span><span class="pi">:</span>
+</code></pre></div></div><p>最简单的目录结构只需要如下： <img src="asset/jekyll/image-1.png" alt="Alt text" /></p><h1 id="主题">主题</h1><p>结构html、样式css、和交互js的组合, 这种组合会呈现不一样的视觉效果，这就称为主题。 在jekyll中，这样组合存储在asset、_data、_layouts、_includes、_sass等文件夹下。 基于gem依赖，开发者可以开发出很多样式，只需要引入gem依赖，即可更改主题文件和文件夹，即可更改样式，非常方便。</p><ol><li>引入主题到Gemfile</li><li>执行<code class="language-plaintext highlighter-rouge">bundle update</code></li></ol><p><strong><a href="https://jekyllrb.com/docs/themes/#themes-with-data-directory">主题的国际化</a></strong></p><h1 id="再进一步---自己定制主题">再进一步 - 自己定制主题</h1><p>成为一个主题开发者。 你可以将你的主题打包到RubyGems上，允许用户通过Bundler安装。 不需要熟悉rubyGems，仅使用jekyll就可以<a href="https://jekyllrb.com/docs/themes/#creating-a-gem-based-theme">定制自己的主题</a>。</p><p>Bundler是Ruby依赖管理工具。 <code class="language-plaintext highlighter-rouge">bundle init</code>用来初始化文件夹。将会在文件夹下新建Gemfile，这个自动生成的Gemfile默认会包含rubygem的源。 Gemfiles最少需要一个gem源。 Gemfileges文件结构:</p><div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozen_string_literal: true</span>
+<span class="c1"># A sample Gemfile</span>
+<span class="c1"># 源</span>
+<span class="c1"># 需要下载的依赖</span>
+<span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+<span class="n">gem</span> <span class="s2">"rails"</span>
+</code></pre></div></div><h1 id="再进一步---将任何html网站转换成jekyll的主题">再进一步 - 将任何html网站转换成Jekyll的主题</h1><ol><li>default.html</li></ol><h1 id="其他----ruby介绍">其他 - ruby介绍</h1><p>Jekyll是ruby的一个gem,jekyll的插件、jekyll-seo-tag、jekyll-feed、jekyll-archives都是gem。gem允许用户将代码分享到ruby包管理工具，gem可以将ruby项目转换成json、Pagination、用API进行交互。 Gemfile: Bundler是一个gem, 它可以安装Gemfile里指定的gem。</p><p><code class="language-plaintext highlighter-rouge">bundle</code>生成Gemfile.lock文件</p><p><br /> <br /> 更多请查看<a href="https://jekyllrb.com/">Jekyll官网</a>。 <br /> <br /> 开始时间-结束时间：2023-06-30 -&gt; 2023-07-03</p></article><div class="back"> <a href="/">返回</a></div><script src="https://utteranc.es/client.js" repo="guyskk/guyskk.github.io" issue-term="title" label="comment" theme="github-light" crossorigin="anonymous" async> </script></main><p style="text-align:center;margin-top:80px;"> <small> <span style="color:#666;">留言 - </span><a href="https://github.com/HackerXinai/HackerXinai.github.io/issues" target="_blank">GitHub Issues</a> <span style="color:#666;padding-left:1em;padding-right:1em;">|</span> <!-- <span style="color:#666;">订阅 - </span><a href="/feed.xml" target="_blank">RSS源</a> --> <span style="color:#666;padding-left:1em;padding-right:1em;">|</span><span style="color:#666;">联系 - </span><a href="/about" target="_blank">关于我</a> </small></p><script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81677911-1', 'auto'); ga('send', 'pageview'); </script></body></html>
