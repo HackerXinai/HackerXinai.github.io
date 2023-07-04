@@ -1,16 +1,22 @@
 ---
 layout: default
-title: cHome2
 ---
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>{{ page.title }}</title>
-  </head>
-  <body>
-  <!-- 这个模板语言，表示将字母小写，最终会在网页上看到hello world! -->
-    <h1>{{ "Hello World!" | downcase }}</h1>
-  </body>
-</html>
+<section>
+	<ul>
+
+		{% for post in site.posts %}
+
+		<li>
+			<div class="post-date">
+				<span>{{ post.date | date: "%m-%d, %Y" }}</span>
+			</div>
+			<div class="title">
+				<a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+			</div>
+		</li>
+
+		{% endfor %}
+
+	</ul>
+</section>

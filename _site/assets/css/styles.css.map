@@ -1,1 +1,0 @@
-{"version":3,"sourceRoot":"","sources":["../../_sass/main.scss"],"names":[],"mappings":"AAAA;EACI;EACA;EACA","sourcesContent":[".current {\r\n    background-color: burlywood;\r\n    font-size: larger;\r\n    color: green;\r\n  }"],"file":"styles.css"}

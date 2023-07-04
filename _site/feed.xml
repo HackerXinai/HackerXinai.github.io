@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>HackerXinAi的博客</title>
+  <subtitle>HackerXinAi的博客</subtitle>
+  <link href="/" rel="alternate"/>
+  <link href="/feed.xml" rel="self" type="application/atom+xml"/>
+  <rights>Copyright ©
+    2015-2023,
+    HackerXinAi</rights>
+  <icon>/assets/favicon.png</icon>
+
+  <author>
+    <name>HackerXinAi</name>
+    <email>HackerXinAi@163.com</email>
+    <uri>/about</uri>
+  </author>
+
+  <updated>2023-07-04T16:33:02+08:00</updated>
+  <id>/</id>
+  <generator version="4.3.2">Jekyll</generator>
+
+  
+
+  
+  
+  
+
+  <entry>
+    <title type="html">商业模式</title>
+    <id>/2023/07/03/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F.html</id>
+    <link rel="alternate" type="text/html" href="/2023/07/03/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F.html"/>
+    <updated>2023-07-03T00:00:00+08:00</updated>
+    <published>2023-07-03T10:00:00+02:00</published>
+    <content type="html" xml:lang="en">
+      <![CDATA[<p><a href="https://meta.stackexchange.com/questions/79435/what-is-stack-overflows-business-model">stackOverFlow</a></p>
+
+]]>
+    </content>
+  </entry>
+
+  
+
+</feed>

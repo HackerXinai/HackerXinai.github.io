@@ -1,7 +1,32 @@
 ---
 layout: default
 ---
-<h1>{{ page.title }}</h1>
-<p>{{ page.date | date_to_string }} - {{ page.author }}</p>
 
-{{ content }}
+<noscript>
+	<style>
+		article .footnotes {
+			display: block;
+		}
+	</style>
+</noscript>
+
+<article>
+
+	<div class="center">
+		<h1>{{ page.title }}</h1>
+		<time>{{ page.date | date: '%Y年, %-m月%-d日' }}</time>
+	</div>
+
+	<div class="divider"></div>
+
+	{{ content }}
+
+</article>
+
+<div class="back">
+	<a href="{{site.baseurl}}/">返回</a>
+</div>
+
+<script src="https://utteranc.es/client.js" repo="guyskk/guyskk.github.io" issue-term="title" label="comment"
+	theme="github-light" crossorigin="anonymous" async>
+	</script>

@@ -1,4 +1,44 @@
-plugins:
-  - jekyll-remote-theme
+# Site Info
+title:              "HackerXinAi的博客"
+description:        "HackerXinAi的博客"
+encoding:           "utf-8"
 
-remote_theme: heiswayi/the-plain
+# Author Info
+author_name:        "HackerXinAi"
+author_email:       "HackerXinAi@163.com"
+
+# Site Build
+highlighter:        rouge
+kramdown:
+    input:          GFM
+    hard_wrap: false
+sass:
+    style:          :compressed
+
+# Other Params
+include:            [ "robots.txt" ]
+exclude:            [ "LICENSE", "README.md", "CNAME", "vendor", "Gemfile" ]
+plugins:
+  - jekyll-sitemap
+
+compress_html:
+    clippings:      all
+    ingore:
+        envs:       [ "test" ]
+
+defaults:
+  -
+    scope:
+      path:         ""
+    values:
+      layout:       "null"
+  -
+    scope:
+      type:         "pages"
+    values:
+      layout:       "page"
+  -
+    scope:
+      type:         "posts"
+    values:
+      layout:       "post"
