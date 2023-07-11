@@ -1,9 +1,12 @@
 ---
 ---
-Jekyll需要前端web开发经验。
-Jekyll具有丰富的主题，而不是只使用gem默认主题。
+Jekyll需要[前端web开发经验][MDN-Web开发入门],了解html，css,js及其调用。
 
-说明：基本就是官网的翻译。可以直接看官网。
+Jekyll做的工作就是：将markdown文档转为html文档，设置好html,css,js样式后，就可以**只专注于文档**，jekyll会把文档自动转为设置的样式。
+
+Jekyll具有丰富的主题，而不是只使用gem默认主题。也可以直接将你看到的Jekyll网页的目录直接拿过来用。
+
+说明：基本就是[官网][Jekyll官网]的翻译。可以直接看官网。
 # 步骤如下：
 ## 1. 建项目
 根据gitpages官网指示创建仓库和index.html，并clone拉到本地，假设在myblog文件夹下。以下命令，没有特殊说明的话，都是在myblog文件夹下执行。
@@ -133,7 +136,7 @@ Front Matter就是其中间的YAML片段。
 
 ```bash
 ---
-# 设置变量。可以使用liquid调用。调用时使用：{{page.my_number}}
+# 设置变量。可以使用liquid调用。调用时使用：{% raw %} {{page.my_number}} {% endraw%}
 my_number: 5
 ---
 ```
@@ -172,17 +175,19 @@ asset:
     js
 _sass:
     main.scss：包含样式的scss文件。
-_posts:放置你的文章。必须按照特殊的格式：发表时间（不能是未来时间，否则显示不出来）、标题   
-      title、后缀。2023-07-02-hello-world-article.md
+_posts:**放置你的文章**。必须按照特殊的格式：发表时间（不能是未来时间，否则显示不出来）、标题title、后缀。比如：2023-07-02-hello-world-article.md
       变量site.posts是所有文章对象，可以用迭代器循环。
       最终文章会被Jekyll构建到_site目录下。
 _config.yml: 配置文件，构建网站时的设置。没有配置时，会自动使用默认配置，比如网站名、markdown转html默认使用Kramdown Markdown filter。
+
+Gemfile内容：
 ```ruby
 # frozen_string_literal: true
 source "https://rubygems.org"
 
 gem "jekyll"
 ```
+_config.yml内容:
 ```yml
 # _config.yml
 collections:
@@ -236,6 +241,7 @@ Bundler是一个gem, 它可以安装Gemfile里指定的gem。
 开始时间-结束时间：2023-06-30 -> 2023-07-03
 
 
+[MDN-Web开发入门]:https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web
 [Jekyll官网]:https://jekyllrb.com/
 [按步骤学习]:https://jekyllrb.com/docs/step-by-step/01-setup/
 [主题的国际化]:https://jekyllrb.com/docs/themes/#themes-with-data-directory

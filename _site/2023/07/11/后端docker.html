@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1" /><title>后端docker</title><meta name="application-name" content="后端docker"><meta name="description" content="教程尚硅谷-docker"><meta name="theme-color" content="#007b8b"><meta name="mobile-web-app-capable" content=yes><meta name="msapplication-starturl" content="https://blog.guyskk.com"><meta name="msapplication-navbutton-color" content="#007b8b"><meta name="apple-mobile-web-app-capable" content=yes><meta name="apple-mobile-web-app-title" content="后端docker"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="twitter:card" content="summary" /><meta name="twitter:site" content="@" /><meta name="twitter:title" content="后端docker" /><meta name="twitter:description" content="教程尚硅谷-docker"><link rel="icon" href="/assets/favicon.png"><link rel="apple-touch-icon" href="/assets/touch-icon.png"><link rel="stylesheet" href="/assets/core.css"><link rel="canonical" href="/2023/07/11/%E5%90%8E%E7%AB%AFdocker.html"><link rel="alternate" type="application/atom+xml" title="HackerXinAi的博客" href="/feed.xml" /></head><body><aside class="logo"> <a href="/"> </a> <span class="logo-prompt">返回主页</span></aside><main> <noscript><style> article .footnotes { display: block; }</style></noscript><article><div class="center"><h1>后端docker</h1><time>2023年, 7月11日</time></div><div class="divider"></div><h1 id="教程">教程</h1><p>尚硅谷-docker</p><p><a href="https://ruanyifeng.com/blog/2018/02/docker-tutorial.html">阮一峰-docker</a></p><p>docker官网</p><h1 id="概述">概述</h1><p>为什么学docker?</p><ul><li>docker本身的能力：容器化部署。</li><li>市场环境: 一切在云端，万物皆容器 职业要求: 云原生java架构师（k8s + docker + kubesphere + devops）</li></ul><p>前置知识(不知道其实也没太大关系，先看呗，就是干。哪里不会补哪里)：</p><p>spring bot cloud git redis nginx mysql… linux centos ubuntu</p><p>下一步：</p><p>k8s</p><h1 id="主要内容">主要内容：</h1><h2 id="简介使用场景安装">简介、使用场景、安装、</h2><p>把源码 + 配置 + 环境 + 版本 + …， 全部打包成镜像，实现平滑迁移。 与虚拟机通过操作系统实现隔离不同，容器技术<strong>只隔离应用程序的运行时环境但容器之间可以共享同一个操作系统</strong>，这里的运行时环境指的是程序运行依赖的各种库以及配置。</p><ul><li>与操作系统动辄几G的内存占用相比，容器技术只需数M空间。</li><li>启动速度快。</li><li>依赖都打包到了container, build once, run everywhere</li><li>提供弹性的云服务。因为docker容器可以随开随关，很适合动态扩容缩容。</li><li>组建微服务架构。通过多个容器，一台机器跑多个服务。 用Go语言实现。</li></ul><p><strong>安装</strong>按照官网指引即可。或查看<a href="https://ruanyifeng.com/blog/2018/02/docker-tutorial.html">阮一峰</a>]大佬的文章。 windows安装有个installer，下载下来一步步安装即可。</p><h2 id="架构">架构</h2><ul><li>Dockerfile 文件。它是一个文本文件，用来配置 image。Docker 根据 该文件生成二进制的 image 文件</li><li>image文件： 应用程序及其依赖被打包在这里。通过这个文件生成docker容器，同一个image可以生成多个容器实例。</li><li>contianer</li><li>Docker client</li><li>Docker daemon</li><li>docker engine</li></ul><p>image文件是一个二进制文件。通用，可以继承。可以尽量使用别人制作好的image文件或基于别人的文件加工。</p><h2 id="常用命令及参数解释">常用命令及参数解释、</h2><p><strong>image</strong></p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 列出本机的所有 image 文件。</span>
+<span class="nv">$ </span>docker image <span class="nb">ls</span>
+
+<span class="c"># 删除 image 文件</span>
+<span class="nv">$ </span>docker image <span class="nb">rm</span> <span class="o">[</span>imageName]
+
+<span class="c"># 抓取image文件</span>
+docker image pull library/hello-world
+<span class="c"># 利用dockerfile生成image</span>
+docker image build <span class="nt">-t</span> koa-demo <span class="nb">.</span>
+
+<span class="c"># 上传image</span>
+docker image tag <span class="o">[</span>imageName] <span class="o">[</span>username]/[repository]:[tag]
+<span class="c"># 上传image实例</span>
+docker image tag koa-demos:0.0.1 ruanyf/koa-demos:0.0.1
+<span class="c"># 上传发布 image 文件 到docker社区。</span>
+docker image push <span class="o">[</span>username]/[repository]:[tag]
+</code></pre></div></div><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080: 8080 tomcat
+<span class="c"># 抓取ubuntu image并运行Ubuntu容器</span>
+docker run <span class="nt">-it</span> ubuntu bash
+<span class="c"># 运行容器。</span>
+docker container run <span class="nt">--rm</span> <span class="nt">-p</span> 8000:3000 <span class="nt">-it</span> koa-demo:0.0.1
+</code></pre></div></div><p><strong>container</strong></p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 运行这个image文件</span>
+docker container run hello-world
+<span class="c"># 查看正在运行的container</span>
+docker container <span class="nb">ls</span>
+<span class="c"># 查看占据硬盘空间的container</span>
+docker container <span class="nb">ls</span> <span class="nt">--all</span>
+docker container start <span class="o">[</span>containerID]
+<span class="c"># 查看日志。如果没有用-it参数启动，可以这样看。</span>
+docker container logs <span class="o">[</span>containerID]
+<span class="c"># 中途进入容器，执行命令</span>
+docker container <span class="nb">exec</span> <span class="nt">-it</span> <span class="o">[</span>containerID] /bin/bash
+<span class="c"># 将容器中的文件拷贝到本地</span>
+docker container <span class="nb">cp</span> <span class="o">[</span>containID]:[/path/to/file] <span class="o">[</span>your path]
+<span class="c"># 终止容器。程序收到 SIGTERM 信号以后，可以自行进行收尾清理工作。</span>
+docker container stop <span class="o">[</span>containerID]
+<span class="c"># 终止容器.立即强行终止</span>
+docker container <span class="nb">kill</span> <span class="o">[</span>containID]
+<span class="c"># 终止运行的容器文件，依然会占据硬盘空间，可以使用docker container rm命令删除。</span>
+docker container <span class="nb">rm</span> <span class="o">[</span>containerID]
+</code></pre></div></div><p>参数说明：</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run 
+    <span class="nt">-d</span>  <span class="c"># 容器启动后，在后台运行</span>
+    <span class="nt">--rm</span> <span class="c">#容器终止运行后，自动删除容器文件。</span>
+    <span class="nt">--name</span> wordpressdb <span class="c">#：容器的名字叫做wordpressdb</span>
+    <span class="nt">-p</span> 8000:3000 <span class="c">#是容器内部端口3000绑定到指定的主机端口8000。</span>
+    <span class="nt">-p</span> 127.0.0.1:8080:80 <span class="c">#只有宿主机可以访问此容器的80端口</span>
+    <span class="nt">--volume</span> <span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/"</span>:/var/www/html <span class="c"># 将当前目录（$PWD）映射到容器的/var/www/html（Apache 对外访问的默认目录）。因此，当前目录的任何修改，都会反映到容器里面，进而被外部访问到。（就是所谓docker数据卷，数据持久化。用--privileged=true解决权限问题）</span>
+    <span class="nt">--env</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>123456 <span class="c">#：向容器传递环境变量 </span>
+    <span class="nt">--link</span> wordpressdb:mysql <span class="c">#表示 WordPress 容器要连到wordpressdb容器，冒号表示该容器的别名是mysql。</span>
+    <span class="o">[</span>containerID]
+</code></pre></div></div><p><strong>其他命令</strong></p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 查看ip</span>
+docker inspect <span class="o">[</span>CONTAINER_ID] | <span class="nb">grep </span>IPAddress
+
+<span class="c"># 拷贝文件。可以双向拷贝。</span>
+<span class="c"># docker -&gt; local</span>
+docker <span class="nb">cp</span> <span class="o">[</span>containerId]:源文件 本地目标目录
+<span class="c"># local -&gt; docker</span>
+docker <span class="nb">cp </span>本地文件 <span class="o">[</span>containerId]:目标路径
+
+<span class="c">#docker查看日志记录</span>
+<span class="c"># 命令格式：</span>
+docker logs <span class="o">[</span>OPTIONS] CONTAINER
+   Options:
+         <span class="nt">--details</span>        显示更多的信息
+         <span class="nt">-f</span>, <span class="nt">--follow</span>         跟踪实时日志
+         <span class="nt">--since</span> string   显示自某个timestamp之后的日志，或相对时间，如42m（即42分钟）
+         <span class="nt">--tail</span> string    从日志末尾显示多少行日志， 默认是all
+         <span class="nt">-t</span>, <span class="nt">--timestamps</span>     显示时间戳
+         <span class="nt">--until</span> string   显示自某个timestamp之前的日志，或相对时间，如42m（即42分钟）
+ <span class="c"># 查看指定时间后的日志，只显示最后100行：</span>
+ docker logs <span class="nt">-f</span> <span class="nt">-t</span> <span class="nt">--since</span><span class="o">=</span><span class="s2">"2018-02-08"</span> <span class="nt">--tail</span><span class="o">=</span>100 <span class="o">[</span>CONTAINER_ID]
+ <span class="c"># 查看最近30分钟的日志:</span>
+ docker logs <span class="nt">--since</span> 30m <span class="o">[</span>CONTAINER_ID]
+ <span class="c"># 查看某时间之后的日志：</span>
+ docker logs <span class="nt">-t</span> <span class="nt">--since</span><span class="o">=</span><span class="s2">"2018-02-08T13:23:37"</span> <span class="o">[</span>CONTAINER_ID]
+ <span class="c"># 查看某时间段日志：</span>
+ docker logs <span class="nt">-t</span> <span class="nt">--since</span><span class="o">=</span><span class="s2">"2018-02-08T13:23:37"</span> <span class="nt">--until</span> <span class="s2">"2018-02-09T12:23:37"</span> <span class="o">[</span>CONTAINER_ID]
+</code></pre></div></div><h2 id="生成你自己的image">生成你自己的image</h2><p>image如此通用，如此重要。如果你要推广自己的软件，势必要自己制作 image 文件。 这就需要用到 Dockerfile 文件。它是一个文本文件，用来配置 image。Docker 根据 该文件生成二进制的 image 文件。 Dockerfile内容：</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM node:8.4
+COPY . /app
+WORKDIR /app
+RUN npm install --registry=https://registry.npm.taobao.org
+EXPOSE 3000
+CMD node demos/01.js
+</code></pre></div></div><p>FROM 指继承node COPY 指目标路径 WORKDIR 工作路径 RUN EXPOSE 暴露容器3000接口，使之可以访问 CMD 容器启动后要执行的命令</p><p>步骤：</p><ol><li>编辑Dockerfile内容</li><li>生成image</li><li>运行container，证明image的可用性</li><li>上传image到docker社区</li></ol><h2 id="docker微服务">docker微服务</h2><p>docker + wordperss</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull wordpress:latest
+docker pull mysql:5.7
+docker container run   <span class="nt">-d</span>   <span class="nt">--rm</span>   <span class="nt">--name</span> wordpressdb   <span class="nt">--env</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>123456   <span class="nt">--env</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>wordpress   mysql:5.7
+
+docker container run   <span class="nt">-d</span> <span class="nt">-p</span> 8080:80  <span class="nt">--rm</span>   <span class="nt">--name</span> wordpress   <span class="nt">--env</span> <span class="nv">WORDPRESS_DB_PASSWORD</span><span class="o">=</span>123456  <span class="nt">--env</span> <span class="nv">WORDPRESS_DB_USER</span><span class="o">=</span>root <span class="nt">--link</span> wordpressdb:mysql  wordpress
+</code></pre></div></div><p>然后访问localhost:8080即可打开wordpress引导安装界面。</p><h2 id="进一步---docker容器互联">进一步 - docker容器互联</h2><p>自定义docker桥接网络来连接多个容器，而不是使用–link.</p><h2 id="进一步---docker使用技术">进一步 - docker使用技术</h2><p>linux虚拟技术。 wsl。window下的Linux。</p><h2 id="docker镜像本地镜像发布到阿里云本地镜像发布到私有库">docker镜像、本地镜像发布到阿里云、本地镜像发布到私有库、</h2><h2 id="安装常用中间件">安装常用中间件</h2><p>高级-docker复杂安装 dockerfile解析 docker + spring微服务 docker网络 docker轻量级可视化工具portainer 监控</p><h2>赞助我</h2><div style="clear: both;"><div style="clear: both;">最近失业了，肚子好饿哦。如果我的内容对你有用的话，请我一碗油泼面吧，谢谢你。</div><img src="/assets/image/weixin.png" alt="用微信帮我" style="float:left;max-width: 40%;border-radius: 27px; box-shadow: -12px -12px 42px #cecece, 12px 12px 42px #ffffff; margin-top: 30px;margin-left: 30px;"> <img src="/assets/image/zhifubao.png" alt="用支付宝帮我" style="float:right;max-width: 40%;border-radius: 27px; box-shadow: -12px -12px 42px #cecece, 12px 12px 42px #ffffff; margin-top: 30px;margin-right:30px;"></div></article><div class="back" style="clear: both;"> <a href="/">返回</a></div><script src="https://utteranc.es/client.js" repo="guyskk/guyskk.github.io" issue-term="title" label="comment" theme="github-light" crossorigin="anonymous" async> </script></main><p style="text-align:center;margin-top:80px;"> <small> <span style="color:#666;">留言 - </span><a href="https://github.com/HackerXinai/HackerXinai.github.io/issues" target="_blank">GitHub Issues</a> <span style="color:#666;padding-left:1em;padding-right:1em;">|</span> <!-- <span style="color:#666;">订阅 - </span><a href="/feed.xml" target="_blank">RSS源</a> --> <span style="color:#666;padding-left:1em;padding-right:1em;">|</span><span style="color:#666;">联系 - </span><a href="/about" target="_blank">关于我</a> </small></p><script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81677911-1', 'auto'); ga('send', 'pageview'); </script></body></html>
